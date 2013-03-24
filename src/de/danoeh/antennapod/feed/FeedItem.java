@@ -38,6 +38,8 @@ public class FeedItem extends FeedComponent {
 	private boolean read;
 	private String paymentLink;
 	private List<Chapter> chapters;
+	/* has downloaded been attempted */
+	private boolean downloadAttempted = false;
 
 	public FeedItem() {
 		this.read = true;
@@ -264,4 +266,13 @@ public class FeedItem extends FeedComponent {
 		}
 		return (isRead() ? State.READ : State.NEW);
 	}
+
+	public boolean getDownloadAttempted() {
+		return(downloadAttempted);
+	}
+	
+	public void setDownloadAttempted() {
+		downloadAttempted=true;
+	}
+		
 }

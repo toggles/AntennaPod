@@ -58,6 +58,7 @@ import de.danoeh.antennapod.feed.FeedImage;
 import de.danoeh.antennapod.feed.FeedItem;
 import de.danoeh.antennapod.feed.FeedManager;
 import de.danoeh.antennapod.feed.FeedMedia;
+import de.danoeh.antennapod.receiver.DownloadsCompleteReceiver;
 import de.danoeh.antennapod.storage.DownloadRequestException;
 import de.danoeh.antennapod.storage.DownloadRequester;
 import de.danoeh.antennapod.syndication.handler.FeedHandler;
@@ -597,6 +598,8 @@ public class DownloadService extends Service {
 			updateReport();
 			cancelNotificationUpdater();
 			stopForeground(true);
+			// Broadcast downloads complete
+			sendBroadcast(new Intent(DownloadsCompleteReceiver.ACTION_DOWNLOADS_COMPLETE));
 		} else {
 			setupNotificationUpdater();
 			startForeground(NOTIFICATION_ID, updateNotifications());

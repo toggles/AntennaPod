@@ -1141,7 +1141,7 @@ public class FeedManager {
 	public void loadDBData(Context context) {
 		updateArrays(context);
 	}
-
+	
 	public void updateArrays(Context context) {
 		feeds.clear();
 		PodDBAdapter adapter = new PodDBAdapter(context);
@@ -1627,6 +1627,20 @@ public class FeedManager {
 			synchronized(queue) {
 				Collections.sort(queue,new QueuePrioritySort());
 			}
+		}
+	}
+
+	public static void postToUI(Runnable runnable) {
+		boolean posted=false;
+		// if we can do this on the UI thread...
+		if(singleton!=null) {
+			if(singleton.contentChanger!=null) {
+				posted=singleton.contentChanger.post(runnable);
+			}
+		}
+		if(!posted) {
+			Log.d(TAG, "Could not post "+ (singleton==null?"No singleton":"singleton"));
+			runnable.run();
 		}
 	}
 

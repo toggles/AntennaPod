@@ -136,7 +136,12 @@
                 <action android:name="de.danoeh.antennapod.feedupdatereceiver.refreshFeeds" />
             </intent-filter>
         </receiver>
-
+        <receiver android:permission=".receiver.DownloadsCompleteReceiver"
+            	  android:name=".receiver.DownloadsCompleteReceiver">
+            <intent-filter>  
+        		<action android:name="de.danoeh.antennapod.receiver.DownloadsCompleteReceiver" />  
+    		</intent-filter> 
+        </receiver>
         <receiver android:permission="android.permission.RECEIVE_BOOT_COMPLETED"
                   android:name=".receiver.OnBootReceiver">
             <intent-filter>  
